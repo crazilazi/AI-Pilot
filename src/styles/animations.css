@@ -1,0 +1,189 @@
+/* Pulse animation for loading dots */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Fade in animation for messages */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scrollbar styling for dark theme */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0d1117;
+  border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 6px;
+  border: 2px solid #0d1117;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Code block scrollbar */
+pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: #161b22;
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Selection styling */
+::selection {
+  background-color: #1f6feb;
+  color: #ffffff;
+}
+
+/* Button hover effects */
+button:hover:not(:disabled) {
+  opacity: 0.9;
+  filter: brightness(1.1);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Input focus effect */
+textarea:focus,
+input:focus {
+  border-color: #1f6feb !important;
+  box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.1);
+}
+
+/* Copy button animation */
+@keyframes checkmark {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Message fade-in animation */
+.message-bubble {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Syntax highlighting theme overrides */
+.hljs {
+  background: #161b22 !important;
+  color: #e6edf3 !important;
+  padding: 0 !important;
+}
+
+/* Custom styles for specific code elements */
+.hljs-comment,
+.hljs-quote {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-section,
+.hljs-link {
+  color: #ff7b72;
+}
+
+.hljs-string {
+  color: #a5d6ff;
+}
+
+.hljs-number,
+.hljs-regexp {
+  color: #79c0ff;
+}
+
+.hljs-title,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+  color: #d2a8ff;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-meta {
+  color: #79c0ff;
+}
+
+.hljs-function,
+.hljs-params {
+  color: #ffa657;
+}
+
+.hljs-built_in {
+  color: #ffa657;
+}
+
+.hljs-tag {
+  color: #7ee787;
+}
+
+.hljs-name {
+  color: #7ee787;
+}
+
+.hljs-attribute {
+  color: #79c0ff;
+}
+
+/* Enhanced code block styling */
+code {
+  font-variant-ligatures: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Link hover effect */
+a:hover {
+  text-decoration: underline;
+}
+
+/* Table striping */
+tbody tr:nth-child(even) {
+  background-color: rgba(110, 118, 129, 0.05);
+}
