@@ -77,6 +77,14 @@ npm run build
 **Access the app:**
 Open http://localhost:8080 in your browser
 
+## Documentation
+
+See the [project documentation](https://github.com/crazilazi/AI-Pilot/wiki) for more details.
+
+## ⭐ Star this repo if you find it useful!
+
+**AIPilot** - Navigate the AI landscape with confidence ✨
+
 ---
 
 Built with React · TypeScript · Redux Observable · Azure OpenAI
