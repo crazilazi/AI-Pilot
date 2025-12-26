@@ -29,7 +29,7 @@ import { MCPServer, MCPTool, MCPServerStatus } from '../types/multiAgent';
 import { MCPToolCall, MCPToolResult } from '../types';
 
 // 📦 Where we save server info (like a contacts list label)
-const STORAGE_KEY = 'retain-ai-mcp-servers';
+const STORAGE_KEY = 'aipilot-ai-mcp-servers';
 
 /**
  * 🏭 THE MCP MANAGER CLASS
@@ -38,10 +38,10 @@ const STORAGE_KEY = 'retain-ai-mcp-servers';
 class MCPManagerService {
   // 📋 Our list of all servers (like a phone book)
   private servers: Map<string, MCPServer> = new Map();
-  
+
   // 📞 Active phone lines to servers (one per connected server)
   private clients: Map<string, Client> = new Map();
-  
+
   // 🔌 The actual connection objects (like phone cables)
   private transports: Map<string, StreamableHTTPClientTransport> = new Map();
 
@@ -109,7 +109,7 @@ class MCPManagerService {
   deleteServer(id: string): boolean {
     // Disconnect first
     this.disconnectServer(id);
-    
+
     const deleted = this.servers.delete(id);
     if (deleted) {
       this.saveToStorage();
@@ -127,7 +127,7 @@ class MCPManagerService {
       isEnabled: !server.isEnabled,
       status: (!server.isEnabled ? server.status : 'disconnected') as MCPServerStatus,
     };
-    
+
     if (!updatedServer.isEnabled) {
       // Disconnect if disabling
       this.disconnectServer(id);
@@ -165,7 +165,7 @@ class MCPManagerService {
       const transport = new StreamableHTTPClientTransport(url, { requestInit });
       const client = new Client(
         {
-          name: `retain-ai-agent-${id}`,
+          name: `aipilot-ai-agent-${id}`,
           version: '1.0.0',
         },
         {
@@ -182,7 +182,7 @@ class MCPManagerService {
 
       // List available tools
       const tools = await this.listServerTools(id);
-      
+
       // Create new server object with updated status (immutability fix)
       const updatedServer = {
         ...connectingServer,
@@ -197,7 +197,7 @@ class MCPManagerService {
       return true;
     } catch (error: any) {
       console.error(`Failed to connect to MCP server "${server.name}":`, error);
-      
+
       // Create new server object with error status (immutability fix)
       const errorServer = {
         ...server,
@@ -259,7 +259,7 @@ class MCPManagerService {
 
   async getAllTools(): Promise<MCPTool[]> {
     const allTools: MCPTool[] = [];
-    
+
     for (const server of this.getEnabledServers()) {
       if (server.status === 'connected') {
         allTools.push(...server.tools);

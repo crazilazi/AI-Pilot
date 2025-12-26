@@ -22,7 +22,7 @@ import { Agent } from '../types/multiAgent';
 import { AgentFactory, AGENT_TEMPLATES } from './agentTemplates';
 
 // 📦 This is the "label" on our storage box where we keep all agents
-const STORAGE_KEY = 'retain-ai-agents';
+const STORAGE_KEY = 'aipilot-ai-agents';
 
 /**
  * 🏭 THE AGENT MANAGER CLASS
@@ -62,17 +62,17 @@ class AgentManagerService {
   initialize(): void {
     // 📖 Look in storage to see what robots we saved before
     const stored = this.loadFromStorage();
-    
+
     // 🤔 If the toy box is empty (no agents exist)
     if (stored.length === 0) {
       // 🎁 Get some starter robots from the factory
       const defaultAgents = AgentFactory.getDefaultAgents();
-      
+
       // 📦 Put each robot in our storage box
       defaultAgents.forEach(agent => {
         this.agents.set(agent.id, agent);
       });
-      
+
       // 💾 Save them so we remember them next time
       this.saveToStorage();
     }
@@ -103,10 +103,10 @@ class AgentManagerService {
   createAgent(agent: Agent): Agent {
     // 📦 Put the robot in our storage box with its ID as the label
     this.agents.set(agent.id, agent);
-    
+
     // 💾 Save to storage so we don't lose it later
     this.saveToStorage();
-    
+
     // ✅ Give back the robot to confirm it was added
     return agent;
   }
@@ -155,7 +155,7 @@ class AgentManagerService {
       // 🏆 Built-in robots go first (the special ones)
       if (a.isBuiltIn && !b.isBuiltIn) return -1;
       if (!a.isBuiltIn && b.isBuiltIn) return 1;
-      
+
       // 🆕 Then sort by newest first (like newest toys on top)
       return b.createdAt - a.createdAt;
     });
@@ -201,7 +201,7 @@ class AgentManagerService {
   updateAgent(id: string, updates: Partial<Agent>): Agent | null {
     // 🔍 Find the robot we want to change
     const agent = this.agents.get(id);
-    
+
     // ❌ If robot doesn't exist, we can't update it
     if (!agent) return null;
 
@@ -215,7 +215,7 @@ class AgentManagerService {
     // 💾 Save the updated robot back to storage
     this.agents.set(id, updatedAgent);
     this.saveToStorage();
-    
+
     // ✅ Give back the updated robot
     return updatedAgent;
   }
@@ -241,7 +241,7 @@ class AgentManagerService {
   deleteAgent(id: string): boolean {
     // 🔍 Find the robot
     const agent = this.agents.get(id);
-    
+
     // 🛡️ Can't delete built-in robots (they're special!)
     if (agent?.isBuiltIn) {
       return false;
@@ -249,12 +249,12 @@ class AgentManagerService {
 
     // 🗑️ Try to delete the robot
     const deleted = this.agents.delete(id);
-    
+
     // 💾 If deleted, save the changes
     if (deleted) {
       this.saveToStorage();
     }
-    
+
     // ✅ Tell if it worked or not
     return deleted;
   }
@@ -289,7 +289,7 @@ class AgentManagerService {
   setActiveAgent(id: string): boolean {
     // 🔍 Find the robot you want to activate
     const agent = this.agents.get(id);
-    
+
     // ❌ If robot doesn't exist, can't activate it
     if (!agent) return false;
 
@@ -301,10 +301,10 @@ class AgentManagerService {
     // ⚡ Turn on the robot you chose (wake up this one!)
     agent.isActive = true;
     this.agents.set(id, agent);
-    
+
     // 💾 Save this choice
     this.saveToStorage();
-    
+
     // ✅ Success!
     return true;
   }
@@ -338,16 +338,16 @@ class AgentManagerService {
   createFromTemplate(templateId: string): Agent | null {
     // 🏭 Ask the robot factory to make this robot
     const agent = AgentFactory.createFromTemplate(templateId);
-    
+
     // ❌ If factory couldn't make it, return nothing
     if (!agent) return null;
 
     // 📦 Add the new robot to our collection
     this.agents.set(agent.id, agent);
-    
+
     // 💾 Save it
     this.saveToStorage();
-    
+
     // ✅ Give back the new robot
     return agent;
   }
@@ -400,13 +400,13 @@ class AgentManagerService {
     try {
       // 🔍 Look for saved robots in storage
       const stored = localStorage.getItem(STORAGE_KEY);
-      
+
       // 📭 If nothing saved, return empty list
       if (!stored) return [];
 
       // 📦 Turn the saved text back into robot objects
       const agents: Agent[] = JSON.parse(stored);
-      
+
       // 📥 Put each robot into our Map (filing cabinet)
       agents.forEach(agent => {
         this.agents.set(agent.id, agent);
@@ -442,7 +442,7 @@ class AgentManagerService {
     try {
       // 📦 Get all robots from our Map and put in a list
       const agents = Array.from(this.agents.values());
-      
+
       // 💾 Turn robots into text and save to storage
       localStorage.setItem(STORAGE_KEY, JSON.stringify(agents));
     } catch (error) {
