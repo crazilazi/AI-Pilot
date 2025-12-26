@@ -19,9 +19,9 @@ import { AIProvider } from '../types/aiProvider';
 
 // Storage keys
 const STORAGE_KEYS = {
-  AGENTS: 'retain-ai-agents',
-  MCP_SERVERS: 'retain-ai-mcp-servers',
-  AI_PROVIDERS: 'retain-ai-providers',
+  AGENTS: 'aipilot-ai-agents',
+  MCP_SERVERS: 'aipilot-ai-mcp-servers',
+  AI_PROVIDERS: 'aipilot-ai-providers',
 } as const;
 
 /**
@@ -41,7 +41,7 @@ interface IStorageAdapter<T> {
  * Current implementation using browser localStorage
  */
 class LocalStorageAdapter<T extends { id: string }> implements IStorageAdapter<T> {
-  constructor(private storageKey: string) {}
+  constructor(private storageKey: string) { }
 
   async getAll(): Promise<T[]> {
     try {
@@ -68,7 +68,7 @@ class LocalStorageAdapter<T extends { id: string }> implements IStorageAdapter<T
   async update(id: string, updates: Partial<T>): Promise<T> {
     const items = await this.getAll();
     const index = items.findIndex(item => item.id === id);
-    
+
     if (index === -1) {
       throw new Error(`Item with id ${id} not found`);
     }
